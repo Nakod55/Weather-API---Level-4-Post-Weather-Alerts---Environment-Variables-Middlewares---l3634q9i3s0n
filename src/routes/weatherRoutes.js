@@ -39,6 +39,15 @@ const weatherController = require('../controllers/weatherController');
 // Level 4: Post Weather Alerts
 router.post('/alerts', async (req, res) => {
    // TODO: Implement this function
+   try{
+      const details= req.body;
+      await weatherController.saveWeatherAlert(details);
+      res.send({ "status": "success", "message": "Weather alert saved successfully" })
+
+   }
+   catch(error){
+      res.status(404).send({ status: "error", message: "Failed to save weather alert" ,error: error.message })
+   }
 });
 
 module.exports = router;
